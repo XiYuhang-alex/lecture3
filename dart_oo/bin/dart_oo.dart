@@ -13,7 +13,8 @@ void main() {
 
   final book = GradeBook(students);
 
-  print('== 成绩册统计 ==');
+  print('== 成绩册统计（mixin 日志输出） ==');
+  book.printSummary();
   print('名单: $students');
   print('平均分: ${book.average.toStringAsFixed(2)}');
   print('最高分: ${book.maxBy((s) => s.score)}');

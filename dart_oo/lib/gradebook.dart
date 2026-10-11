@@ -1,9 +1,11 @@
+import 'logger.dart';
 import 'student.dart';
 
 /// 成绩册：用类建模"课程成绩册"。
 /// 内部持有 List<Student>，构造时接收列表。
 /// 所有统计均用 Iterable 高阶方法链实现，不手写 for 循环。
-class GradeBook {
+/// 混入 Logger 后即可直接使用 log 方法输出日志。
+class GradeBook with Logger {
   final List<Student> _students;
 
   /// 构造时接收学生列表，复制一份避免外部修改内部状态。
@@ -38,4 +40,10 @@ class GradeBook {
           return acc;
         },
       );
+
+  /// 统计摘要：经由混入的 Logger 输出。
+  void printSummary() {
+    log('共 ${_students.length} 人，平均分 ${average.toStringAsFixed(2)}，'
+        '及格 $countPassed 人，最高分 ${maxBy((s) => s.score).name}');
+  }
 }
